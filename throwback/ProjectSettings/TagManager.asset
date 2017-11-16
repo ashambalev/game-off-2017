@@ -15,8 +15,8 @@ TagManager:
   - 
   - Level
   - Player
-  - Enemy
-  - 
+  - Object
+  - InactiveObject
   - 
   - 
   - 

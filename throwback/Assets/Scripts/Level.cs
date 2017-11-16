@@ -8,7 +8,10 @@ public class Level : MonoBehaviour
 
     public float SpeedMultiplier = 5f;
     public float SpeedBoostMultiplier = 10f;
+    public float ForceMult = 2f;
     public LevelItem[] LevelItems;
+
+    public SurfaceEffector2D Ground;
 
     // Use this for initialization
     void Start()
@@ -23,6 +26,7 @@ public class Level : MonoBehaviour
         if (!GameManager.Instance.GameStarted)
             return;
         var speed = SpeedMultiplier * GameManager.Instance.CurrentLevelSpeed + GameManager.Instance.Player.SpeedBoost * SpeedBoostMultiplier;
+        Ground.speed = -ForceMult * speed;
         foreach (var item in LevelItems)
         {
             item.transform.position -= new Vector3(speed * Time.deltaTime * item.ParallaxX, 0, 0);
