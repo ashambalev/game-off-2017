@@ -41,7 +41,7 @@ public class FlyingObject : MonoBehaviour
         _rb.velocity = Vector2.zero;
         _rb.angularVelocity = 0;
         _rb.isKinematic = false;
-        _rb.AddForce(Orientation.normalized * Random.Range(Force.x, Force.y), ForceMode2D.Impulse);
+        _rb.AddForce(GameManager.Instance.CurrentLevelSpeed * Orientation.normalized * Random.Range(Force.x, Force.y), ForceMode2D.Impulse);
         _rb.AddTorque(Random.Range(Rotation.x, Rotation.y), ForceMode2D.Impulse);
     }
 
@@ -50,7 +50,7 @@ public class FlyingObject : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Q))
             Spawn();
     }
 

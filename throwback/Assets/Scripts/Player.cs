@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     public Vector3 ThrowPosition = new Vector3(-1.25f, 1.84f, 0f);
     public Vector2 ThrowRotation = new Vector2(-1f, 1f);
     public Vector2 ThrowForce = new Vector2(8f, 13f);
+
+    public LayerMask GrabLayerMask = -1;
+    public Vector2 GrabPosition;
+    public Vector2 GrabSize;
     public float ThrowSpeedBoost = 0.6f;
 
     void Start()
@@ -55,6 +59,7 @@ public class Player : MonoBehaviour
     {
         Animator.SetFloat("Speed", CurrentSpeed);
         Animator.SetBool("Flying", InAir);
+        CheckForGrabbableObject();
     }
 
     // Update is called once per frame
@@ -78,7 +83,7 @@ public class Player : MonoBehaviour
 
         if (Grabbing && GrabbableObject != null)
         {
-            GrabbableObject.transform.position = Vector3.Lerp(GrabbableObject.transform.position, transform.position + HoldPosition, 50f * Time.deltaTime);
+            GrabbableObject.transform.position = Vector3.Lerp(GrabbableObject.transform.position, transform.position + HoldPosition, 30f * Time.deltaTime);
         }
 
 
@@ -138,6 +143,27 @@ public class Player : MonoBehaviour
         VerticalSpeed = JumpSpeed;
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position + new Vector3(GrabPosition.x, GrabPosition.y), GrabSize);
+    }
+
+    public void CheckForGrabbableObject()
+    {
+        var cols = Physics2D.OverlapBoxAll(new Vector2(transform.position.x, transform.position.y) + GrabPosition, GrabSize, 0, GrabLayerMask);
+        if (cols.Length > 0)
+        {
+            CanGrab = true;
+            GrabbableObject = cols[0].attachedRigidbody;
+        }
+        else
+        {
+            CanGrab = false;
+            GrabbableObject = null;
+        }
+    }
+
     public void StartGrab()
     {
         if (!CanGrab || GrabbableObject == null)
@@ -161,29 +187,6 @@ public class Player : MonoBehaviour
         SpeedBoost = ThrowSpeedBoost;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Level"))
-            return;
-        GrabbableObject = other.GetComponent<Rigidbody2D>();
-        CanGrab = true;
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Level"))
-            return;
-        CanGrab = true;
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (Grabbing || other.gameObject.layer == LayerMask.NameToLayer("Level"))
-            return;
-
-        GrabbableObject = null;
-        CanGrab = false;
-    }
 
     void OnCollisionEnter2D(Collision2D other)
     {

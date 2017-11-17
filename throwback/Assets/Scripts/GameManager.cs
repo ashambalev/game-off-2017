@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     public float CurrentLevelSpeed = 1f;
+    public float TargetLevelSpeed = 1f;
     public float LevelSpeed = 1f;
     public float LevelSpeedIncrease = 0.1f;
     public Player Player;
@@ -54,6 +55,11 @@ public class GameManager : Singleton<GameManager>
         PlayerPosition += 0.2f;
     }
 
+    public void IncreaseDifficulty()
+    {
+        TargetLevelSpeed += 0.2f;
+    }
+
     void Update()
     {
 
@@ -66,9 +72,20 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            IncreaseDifficulty();
+        }
+
         if (Player.transform.position.x > PlayerPosition)
         {
             CurrentLevelSpeed = LevelSpeed + Mathf.Abs(Player.transform.position.x - PlayerPosition) * LevelSpeedIncrease;
+        }
+
+        if (TargetLevelSpeed > LevelSpeed)
+        {
+            LevelSpeed = Mathf.Lerp(LevelSpeed, TargetLevelSpeed, 2f * Time.deltaTime);
         }
     }
 }
