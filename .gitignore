@@ -4,7 +4,7 @@
 /throwback/[Bb]uild/
 /throwback/[Bb]uilds/
 /throwback/Assets/AssetStoreTools*
-
+release/
 # Visual Studio 2015 cache directory
 /throwback/.vs/
 /throwback/.vscode/
