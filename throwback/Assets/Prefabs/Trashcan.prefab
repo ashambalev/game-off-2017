@@ -39,6 +39,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4592921105012648}
   - component: {fileID: 212390728313472850}
+  - component: {fileID: 114038182554432246}
+  - component: {fileID: 114006373866909010}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -108,6 +110,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.25, y: 1.8}
   m_Direction: 0
+--- !u!114 &114006373866909010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1902471807428986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19ced47e94a87f4689fe689a8a490ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114038182554432246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1902471807428986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94fca60ed966405883e178489c08fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 0.9558824, b: 0.95862067, a: 1}
+  outlineSize: 1
 --- !u!114 &114465067183533218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,7 +148,7 @@ MonoBehaviour:
   StartPosition: {x: 12, y: 0.18, z: 0}
   Orientation: {x: -3.48, y: 1.3, z: 0}
   Rotation: {x: -1, y: 1}
-  Force: {x: 10, y: 15}
+  Force: {x: 15, y: 15}
 --- !u!114 &114968729280812608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,7 +174,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8837a1e020f434930bece0b477684168, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,11 +195,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7832d45b48b7944ed9336f06a38b7192, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5923443, g: 0.7827704, b: 0.9705882, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.24, y: 1.6}
+  m_Size: {x: 1.32, y: 1.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

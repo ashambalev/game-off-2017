@@ -18,8 +18,8 @@ TagManager:
   - Object
   - InactiveObject
   - Background
-  - 
-  - 
+  - ThrowedObject
+  - Obstacle
   - 
   - 
   - 

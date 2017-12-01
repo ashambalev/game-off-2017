@@ -19,7 +19,7 @@ public class FlyingObject : MonoBehaviour
     {
         transform.position = StartPosition;
         _rb = GetComponent<Rigidbody2D>();
-        _rb.isKinematic = true;
+        // _rb.isKinematic = true;
     }
 
     /// <summary>
@@ -31,6 +31,19 @@ public class FlyingObject : MonoBehaviour
         Gizmos.DrawWireSphere(StartPosition, 1f);
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(StartPosition, StartPosition + Orientation.normalized);
+    }
+
+    public void SpawnAndThrow(Vector3 pos, Vector3 direction)
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        StartPosition = transform.position = pos;
+        Orientation = direction;
+        gameObject.layer = LayerMask.NameToLayer("Object");
+        _rb.velocity = Vector2.zero;
+        _rb.angularVelocity = 0;
+        _rb.isKinematic = false;
+        _rb.AddForce(direction.normalized * Random.Range(Force.x, Force.y), ForceMode2D.Impulse);
+        _rb.AddTorque(Random.Range(Rotation.x, Rotation.y), ForceMode2D.Impulse);
     }
 
     [ContextMenu("Spawn")]
@@ -58,6 +71,9 @@ public class FlyingObject : MonoBehaviour
     void FixedUpdate()
     {
         if (transform.position.y < -5f)
+        {
             _rb.isKinematic = true;
+            Destroy(gameObject);
+        }
     }
 }
